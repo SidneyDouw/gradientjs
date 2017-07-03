@@ -58,12 +58,10 @@ define(['jscolor'], function(jsc) {
 			_this.gradient.hover = true;
 		};
 		this.square.onmousedown = function(evt) {
-			console.log('down')
 			_this.drag = true;
 		};
 		this.gradient.domElement.addEventListener('mousemove', function(evt) {
 			if (_this.drag) {
-				console.log('moving')
 				var x = evt.clientX - _this.gradient.domElement.offsetLeft - _this.width/2
 				if (x < 0) x = 0;
 				if (x > _this.gradient.domElement.clientWidth-_this.width) x = _this.gradient.domElement.clientWidth - _this.width;

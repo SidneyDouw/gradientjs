@@ -1,4 +1,4 @@
-require(['Gradient'], function(Gradient) {
+define(['Gradient'], function(Gradient) {
 
 	return Gradient;
 
