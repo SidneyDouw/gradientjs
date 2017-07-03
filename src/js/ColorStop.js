@@ -51,6 +51,7 @@ define(['jscolor'], function(jsc) {
 		 		_this.color = [Math.round(this.rgb[0]), Math.round(this.rgb[1]), Math.round(this.rgb[2]), 1];
 		 		_this.square.style.background = _this.colorToString();
 		 		_this.gradient.calculateGradient();
+				_this.gradient.onChange.apply(_this.gradient)
 		 	};
 		};
 		this.square.onmouseover = function(evt) {
@@ -68,6 +69,7 @@ define(['jscolor'], function(jsc) {
 				_this.square.style.left = x +'px';
 				_this.position = x/_this.gradient.domElement.clientWidth;
 				_this.gradient.calculateGradient();
+				_this.gradient.onChange.apply(_this.gradient)
 			}
 		});
 		window.addEventListener('mouseup', function(evt) {

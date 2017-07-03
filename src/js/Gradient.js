@@ -2,6 +2,8 @@ define(['colorStop'], function(ColorStop) {
 
 	function Gradient(domElement, size) {
 
+		this.onChange = function() {}
+
 		var _this = this
 
 		this.domElement = domElement;
@@ -113,6 +115,24 @@ define(['colorStop'], function(ColorStop) {
 	    return color;
 
 	};
+	Gradient.prototype.colorToString = function() {
+		this.colorStops.sort(function(a,b){
+			return a.position - b.position;
+		});
+		
+		var str = '';
+		var j;
+		for (j = 0; j < this.colorStops.length; j++) {
+			var c = this.colorStops[j];
+			str += ', ' + c.colorToString() + ' ' + Math.round(c.position*10000)/100 + '%';
+		}
+		if (j > 1) {
+			return 'linear-gradient(to right' + str + ')';
+		} else {
+			str = this.colorStops[0].colorToString();
+			return str;
+		}
+	}
 
 	return Gradient;
 
