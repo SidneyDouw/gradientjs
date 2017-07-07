@@ -17,7 +17,7 @@ define(['colorStop'], function(ColorStop) {
 
 		this.domElement.onclick = function(evt) {
 			if (!_this.hover) {
-				var x = (evt.clientX - this.offsetLeft) / this.clientWidth;
+				var x = (evt.clientX - this.getBoundingClientRect().left) / this.clientWidth;
 				_this.addColorStop(x, _this.getColor(x))
 			}
 		}
@@ -42,7 +42,7 @@ define(['colorStop'], function(ColorStop) {
 
 	Gradient.prototype.createInitialColorStops = function() {
 		
-		this.addColorStop(0, [255, 0, 0, 1]);
+		this.addColorStop(0, [255, 255, 0, 1]);
 		this.addColorStop(1, [128, 0, 0, 1]);
 
 	};

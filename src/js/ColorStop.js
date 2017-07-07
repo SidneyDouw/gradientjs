@@ -63,7 +63,7 @@ define(['jscolor'], function(jsc) {
 		};
 		this.gradient.domElement.addEventListener('mousemove', function(evt) {
 			if (_this.drag) {
-				var x = evt.clientX - _this.gradient.domElement.offsetLeft - _this.width/2
+				var x = evt.clientX - _this.gradient.domElement.getBoundingClientRect().left - _this.width/2
 				if (x < 0) x = 0;
 				if (x > _this.gradient.domElement.clientWidth-_this.width) x = _this.gradient.domElement.clientWidth - _this.width;
 				_this.square.style.left = x +'px';
