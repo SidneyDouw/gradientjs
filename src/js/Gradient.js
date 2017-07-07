@@ -42,8 +42,8 @@ define(['colorStop'], function(ColorStop) {
 
 	Gradient.prototype.createInitialColorStops = function() {
 		
-		this.addColorStop(0, [255, 255, 0, 1]);
-		this.addColorStop(1, [128, 0, 0, 1]);
+		this.addColorStop(0, [255, 0, 0, 1]);
+		this.addColorStop(1, [172, 0, 0, 1]);
 
 	};
 	Gradient.prototype.addColorStop = function(position, color) {

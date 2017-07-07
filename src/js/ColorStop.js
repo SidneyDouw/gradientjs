@@ -67,7 +67,7 @@ define(['jscolor'], function(jsc) {
 				if (x < 0) x = 0;
 				if (x > _this.gradient.domElement.clientWidth-_this.width) x = _this.gradient.domElement.clientWidth - _this.width;
 				_this.square.style.left = x +'px';
-				_this.position = x/_this.gradient.domElement.clientWidth;
+				_this.position = x/(_this.gradient.domElement.clientWidth -  _this.width);
 				_this.gradient.calculateGradient();
 				_this.gradient.onChange.apply(_this.gradient)
 			}
