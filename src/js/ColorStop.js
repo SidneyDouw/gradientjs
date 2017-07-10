@@ -37,7 +37,7 @@ define(['jscolor'], function(jsc) {
 		this.square.style.cursor = 'pointer';
 
 		this.cp = document.createElement('input');
-		this.cp.className = 'jscolor';
+		this.cp.className = 'jscolor {position: "top", backgroundColor: "rgba(38, 38, 38, 0.75)", padding: 10}';
 		this.cp.value = this.colorToString()
 		this.cp.style.width = 0;
 		this.cp.style.height = 0;

@@ -83,10 +83,11 @@ define(['colorStop'], function(ColorStop) {
 	Gradient.prototype.getColor = function(position) {
 		if (this.colorStops.length > 1) {
 			for (var i = 1; i < this.colorStops.length; i++) {
-				var k = this.colorStops[i];
-				if (position <= k.position && position >= this.colorStops[i-1].position) {
-					var percent = position * (1/k.position);
-					return this.getColorFormula(k.color, this.colorStops[i-1].color, percent);
+				var k1 = this.colorStops[i-1];
+				var k2 = this.colorStops[i];
+				if (position <= k2.position && position >= k1.position) {
+					var percent = (position-k1.position) / (k2.position-k1.position);
+					return this.getColorFormula(k1.color, k2.color, percent);
 				}
 			}
 			if (position < this.colorStops[0].position) {
@@ -99,7 +100,7 @@ define(['colorStop'], function(ColorStop) {
 			return this.colorStops[0].color;
 		}
 	};
-	Gradient.prototype.getColorFormula = function(color1, color2, weight) {
+	Gradient.prototype.getColorFormula = function(color2, color1, weight) {
 		
 		var p = weight;
 	    var w = p * 2 - 1;
