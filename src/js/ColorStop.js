@@ -10,8 +10,11 @@ define(['jscolor'], function(jsc) {
 		
 		this.size = size;
 
-		this.width = this.gradient.domElement.clientHeight/(10-this.size);
-		this.height = this.gradient.domElement.clientHeight + this.gradient.domElement.clientHeight*0.5;
+		this.domWidth = parseFloat(window.getComputedStyle(this.gradient.domElement).getPropertyValue('width'));
+		this.domHeight = parseFloat(window.getComputedStyle(this.gradient.domElement).getPropertyValue('height'));
+
+		this.width = this.domHeight/(10-this.size);
+		this.height = this.domHeight + this.domHeight*0.5;
 
 		this.addDomElement();
 
@@ -21,14 +24,14 @@ define(['jscolor'], function(jsc) {
 
 		var _this = this;
 
-		var x = this.gradient.domElement.clientWidth * this.position;
+		var x = this.domWidth * this.position;
 		if (x < 0) x = 0;
-		if (x > this.gradient.domElement.clientWidth-this.width) x = this.gradient.domElement.clientWidth - this.width;
+		if (x > this.domWidth-this.width) x = this.domWidth - this.width;
 
 		this.square = document.createElement('div');
 		this.square.style.position = 'absolute';
 		this.square.style.left = x + 'px'; 
-		this.square.style.bottom = -1 - this.gradient.domElement.clientHeight*0.25 + 'px';
+		this.square.style.bottom = -1 - this.domHeight*0.25 + 'px';
 		this.square.style.width = this.width + 'px';
 		this.square.style.height = this.height + 'px';
 		this.square.style.borderRadius = 20 + 'px';
@@ -38,7 +41,7 @@ define(['jscolor'], function(jsc) {
 
 		this.cp = document.createElement('input');
 		this.cp.className = 'jscolor {position: "top", backgroundColor: "rgba(38, 38, 38, 0.75)", padding: 10}';
-		this.cp.value = this.colorToString()
+		this.cp.value = this.colorToString();
 		this.cp.style.width = 0;
 		this.cp.style.height = 0;
 		this.cp.style.margin = 0;
@@ -51,7 +54,7 @@ define(['jscolor'], function(jsc) {
 		 		_this.color = [Math.round(this.rgb[0]), Math.round(this.rgb[1]), Math.round(this.rgb[2]), 1];
 		 		_this.square.style.background = _this.colorToString();
 		 		_this.gradient.calculateGradient();
-				_this.gradient.onChange.apply(_this.gradient)
+				_this.gradient.onChange.apply(_this.gradient);
 		 	};
 		};
 		this.square.onmouseover = function(evt) {
@@ -63,13 +66,13 @@ define(['jscolor'], function(jsc) {
 		};
 		this.gradient.domElement.addEventListener('mousemove', function(evt) {
 			if (_this.drag) {
-				var x = evt.clientX - _this.gradient.domElement.getBoundingClientRect().left - _this.width/2
+				var x = evt.clientX - _this.gradient.domElement.getBoundingClientRect().left - _this.width/2;
 				if (x < 0) x = 0;
-				if (x > _this.gradient.domElement.clientWidth-_this.width) x = _this.gradient.domElement.clientWidth - _this.width;
+				if (x > _this.domWidth-_this.width) x = _this.domWidth - _this.width;
 				_this.square.style.left = x +'px';
-				_this.position = x/(_this.gradient.domElement.clientWidth -  _this.width);
+				_this.position = x/(_this.domWidth -  _this.width);
 				_this.gradient.calculateGradient();
-				_this.gradient.onChange.apply(_this.gradient)
+				_this.gradient.onChange.apply(_this.gradient);
 			}
 		});
 		window.addEventListener('mouseup', function(evt) {
@@ -84,7 +87,7 @@ define(['jscolor'], function(jsc) {
 		// this.square.append(this.triangle);
 		this.gradient.domElement.append(this.square);
 
-		jsc.register()
+		jsc.register();
 	};
 	ColorStop.prototype.colorToString = function() {
 		return 'rgba('+this.color[0]+', '+this.color[1]+', '+this.color[2]+', '+this.color[3]+')';

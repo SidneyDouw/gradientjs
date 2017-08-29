@@ -2,9 +2,9 @@ define(['colorStop'], function(ColorStop) {
 
 	function Gradient(domElement, size) {
 
-		this.onChange = function() {}
+		this.onChange = function() {};
 
-		var _this = this
+		var _this = this;
 
 		this.domElement = domElement;
 
@@ -18,25 +18,23 @@ define(['colorStop'], function(ColorStop) {
 		this.domElement.onclick = function(evt) {
 			if (!_this.hover) {
 				var x = (evt.clientX - this.getBoundingClientRect().left) / this.clientWidth;
-				_this.addColorStop(x, _this.getColor(x))
+				_this.addColorStop(x, _this.getColor(x));
 			}
-		}
+		};
 		this.domElement.oncontextmenu = function(evt) {
 			if (_this.hover) {
 				var cs;
 				for (var i = 0; i < _this.colorStops.length; i++) {
 					cs = _this.colorStops[i];
-					if (cs.hover) {
-						break
-					}
+					if (cs.hover) break;
 				}
 				if (_this.colorStops.length > 1) {
-					_this.removeColorStop(evt.toElement, cs)
+					_this.removeColorStop(evt.toElement, cs);
 					_this.hover = false;
 				}
 			}
 			return false;
-		}
+		};
 
 	}
 
@@ -58,7 +56,7 @@ define(['colorStop'], function(ColorStop) {
 		var i = this.colorStops.indexOf(cs);
 		this.colorStops.splice(i, 1);
 
-		this.calculateGradient()
+		this.calculateGradient();
 	};
 	Gradient.prototype.calculateGradient = function() {
 		
@@ -133,7 +131,7 @@ define(['colorStop'], function(ColorStop) {
 			str = this.colorStops[0].colorToString();
 			return str;
 		}
-	}
+	};
 
 	return Gradient;
 

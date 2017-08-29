@@ -11,8 +11,10 @@ gulp.task('plugins', function() {
 });
 
 gulp.task('clear', getTask('clear'))
+
 gulp.task('index', getTask('index'));
 gulp.task('js', getTask('rjs'));
+
 gulp.task('browserSync', getTask('browserSync'));
 
 gulp.task('build', ['clear', 'index', 'js']);
