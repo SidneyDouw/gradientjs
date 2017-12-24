@@ -4,23 +4,22 @@ define(['jscolor'], function(jsc) {
 
 	function ColorStop(gradient, position, color, size) {
 
-		this.gradient = gradient;
 		this.position = position;
 		this.color = color;
 		
 		this.size = size;
 
-		this.domWidth = parseFloat(window.getComputedStyle(this.gradient.domElement).getPropertyValue('width'));
-		this.domHeight = parseFloat(window.getComputedStyle(this.gradient.domElement).getPropertyValue('height'));
+		this.domWidth = parseFloat(window.getComputedStyle(gradient.domElement).getPropertyValue('width'));
+		this.domHeight = parseFloat(window.getComputedStyle(gradient.domElement).getPropertyValue('height'));
 
 		this.width = this.domHeight/(10-this.size);
 		this.height = this.domHeight + this.domHeight*0.5;
 
-		this.addDomElement();
+		this.addDomElement(gradient);
 
 	}
 
-	ColorStop.prototype.addDomElement = function() {
+	ColorStop.prototype.addDomElement = function(gradient) {
 
 		var _this = this;
 
@@ -53,26 +52,26 @@ define(['jscolor'], function(jsc) {
 		 	this.children[0].jscolor.onFineChange = function() {
 		 		_this.color = [Math.round(this.rgb[0]), Math.round(this.rgb[1]), Math.round(this.rgb[2]), 1];
 		 		_this.square.style.background = _this.colorToString();
-		 		_this.gradient.calculateGradient();
-				_this.gradient.onChange.apply(_this.gradient);
+				gradient.calculateGradient();
+				gradient.onChange.apply(gradient);
 		 	};
 		};
 		this.square.onmouseover = function(evt) {
 			_this.hover = true;
-			_this.gradient.hover = true;
+			gradient.hover = true;
 		};
 		this.square.onmousedown = function(evt) {
 			_this.drag = true;
 		};
-		this.gradient.domElement.addEventListener('mousemove', function(evt) {
+		gradient.domElement.addEventListener('mousemove', function(evt) {
 			if (_this.drag) {
-				var x = evt.clientX - _this.gradient.domElement.getBoundingClientRect().left - _this.width/2;
+				var x = evt.clientX - gradient.domElement.getBoundingClientRect().left - _this.width/2;
 				if (x < 0) x = 0;
 				if (x > _this.domWidth-_this.width) x = _this.domWidth - _this.width;
 				_this.square.style.left = x +'px';
 				_this.position = x/(_this.domWidth -  _this.width);
-				_this.gradient.calculateGradient();
-				_this.gradient.onChange.apply(_this.gradient);
+				gradient.calculateGradient();
+				gradient.onChange.apply(gradient);
 			}
 		});
 		window.addEventListener('mouseup', function(evt) {
@@ -80,12 +79,12 @@ define(['jscolor'], function(jsc) {
 		});
 		this.square.onmouseout = function(evt) {
 			_this.hover = false;
-			_this.gradient.hover = false;
+			gradient.hover = false;
 		};
 
 		this.square.append(this.cp);
 		// this.square.append(this.triangle);
-		this.gradient.domElement.append(this.square);
+		gradient.domElement.append(this.square);
 
 		jsc.register();
 	};

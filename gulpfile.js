@@ -1,5 +1,6 @@
 var gulp 	= require('gulp');
-var plugins = require('gulp-load-plugins')({pattern: ['*']});
+var plugins = require('gulp-load-plugins')({pattern: ['*'],
+											rename: {'jshint': 'jshintG'}});
 var config 	= require('./gulp-config.js');
 
 function getTask(task) {
@@ -12,16 +13,16 @@ gulp.task('plugins', function() {
 
 gulp.task('clear', getTask('clear'))
 
-gulp.task('index', getTask('index'));
+gulp.task('html', getTask('html'));
 gulp.task('js', getTask('rjs'));
 
 gulp.task('browserSync', getTask('browserSync'));
 
-gulp.task('build', ['clear', 'index', 'js']);
+gulp.task('build', ['clear', 'html', 'js']);
 
 gulp.task('default', ['build', 'browserSync'], function() {
 
-	gulp.watch(config.paths.src.index, ['index']);
+	gulp.watch(config.paths.src.html, ['html']);
 	gulp.watch(config.paths.src.js, ['js']);
 
 });

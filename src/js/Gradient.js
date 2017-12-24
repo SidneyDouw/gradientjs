@@ -56,7 +56,9 @@ define(['colorStop'], function(ColorStop) {
 		var i = this.colorStops.indexOf(cs);
 		this.colorStops.splice(i, 1);
 
-		this.calculateGradient();
+		if (this.colorStops.length > 0) {
+			this.calculateGradient();
+		}
 	};
 	Gradient.prototype.calculateGradient = function() {
 		

@@ -1,7 +1,7 @@
 module.exports = {
 	paths: {
 		src: {
-			index: 	'src/index.*',
+			html: 	'src/*.html',
 			js: 	'src/js/**/*.js',
 			jsMain: 'src/js/main.js'
 		},
@@ -9,6 +9,9 @@ module.exports = {
 			root: 	'dist/',
 			js: 	'dist/'
 		}
+	},
+	browserSync: {
+		server: 'dist/'
 	},
 	rjs: {
 		paths: {
