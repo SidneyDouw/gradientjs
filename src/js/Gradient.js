@@ -30,6 +30,7 @@ define(['colorStop'], function(ColorStop) {
 				}
 				if (_this.colorStops.length > 1) {
 					_this.removeColorStop(evt.toElement, cs);
+					_this.onChange.apply(_this);
 					_this.hover = false;
 				}
 			}
